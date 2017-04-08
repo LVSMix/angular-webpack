@@ -27,6 +27,7 @@ import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { MyComponent } from './my-component';
+import { ProfileComponent } from './components/profile';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 
@@ -55,6 +56,7 @@ type StoreType = {
     AboutComponent,
     HomeComponent,
     MyComponent,
+    ProfileComponent,
     NoContentComponent,
     XLargeDirective
   ],

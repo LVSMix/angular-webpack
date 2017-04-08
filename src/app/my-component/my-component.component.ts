@@ -2,14 +2,28 @@ import { Component } from '@angular/core';
 
 @Component({
   template: `
-    <h1>{{localState.name}}</h1>
+    <pre>
+      <profile [name]="localState.name"
+               [lastname]="localState.lastname"
+               [position]="localState.position">
+      </profile>
+      <profile [name]="localState.name"
+               [lastname]="localState.lastname"
+               [position]="localState.position">
+      </profile>
+      <profile [name]="localState.name"
+               [lastname]="localState.lastname"
+               [position]="localState.position">
+      </profile>
+    </pre>
   `
 })
-export class MyComponent{
+export class MyComponent {
 
     public localState = {
-      name: 'Marcelo'
+      name: 'Marcelo',
+      lastname: 'Carmona',
+      position: 'Developer'
     };
-
 
 }
