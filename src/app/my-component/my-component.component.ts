@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { INCREMENT, DECREMENT, RESET } from './../counter';
+import { Observable } from 'rxjs/Observable';
+
+interface AppState {
+  counter: number;
+}
 
 @Component({
   template: `
@@ -16,14 +23,45 @@ import { Component } from '@angular/core';
                [position]="localState.position">
       </profile>
     </pre>
+
+    <input type="text" [(ngModel)]="localState.name" #myinput/>
+    <button (click)="submit($event)" >submit</button>
+
+    <button (click)="increment()">Increment</button>
+		<div>Current Count: {{ counter | async }}</div>
+		<button (click)="decrement()">Decrement</button>
+
+		<button (click)="reset()">Reset Counter</button>
   `
 })
 export class MyComponent {
-
     public localState = {
       name: 'Marcelo',
       lastname: 'Carmona',
       position: 'Developer'
     };
 
+    public counter: Observable<number>;
+
+    @ViewChild('myinput') private myinput;
+
+    constructor(private store: Store<AppState>) {
+      this.counter = store.select('counter');
+    }
+
+    public submit(event) {
+      this.localState.name =  this.myinput.nativeElement.value + 'lala';
+    }
+
+    public increment() {
+      this.store.dispatch({ type: INCREMENT });
+    }
+
+    public decrement() {
+      this.store.dispatch({ type: DECREMENT });
+    }
+
+    public reset() {
+      this.store.dispatch({ type: RESET });
+    }
 }

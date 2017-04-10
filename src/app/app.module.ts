@@ -15,6 +15,10 @@ import {
   PreloadAllModules
 } from '@angular/router';
 
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './counter';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -64,7 +68,11 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    StoreModule.provideStore({ counter: counterReducer }),
+    StoreDevtoolsModule.instrumentOnlyWithExtension({
+      maxAge: 15
+    })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
