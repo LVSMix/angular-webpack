@@ -15,8 +15,9 @@ import {
   PreloadAllModules
 } from '@angular/router';
 
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, combineReducers } from '@ngrx/store';
 import { counterReducer } from './counter';
+import { profileReducer } from './profile';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 /*
@@ -69,7 +70,7 @@ type StoreType = {
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    StoreModule.provideStore({ counter: counterReducer }),
+    StoreModule.provideStore(combineReducers({ counter: counterReducer, profile: profileReducer })),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 15
     })

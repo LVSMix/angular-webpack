@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { INCREMENT, DECREMENT, RESET } from './../counter';
+import { ADD_PROFILE, REMOVE_PROFILE, RESET_PROFILE, Profile } from './../profile';
 import { Observable } from 'rxjs/Observable';
 
 interface AppState {
@@ -32,6 +33,9 @@ interface AppState {
 		<button (click)="decrement()">Decrement</button>
 
 		<button (click)="reset()">Reset Counter</button>
+
+    <button (click)="addProfile()">Add Profile</button>
+    <div>profile: {{profile.name}} - {{profile.lastname}} - {{profile.position}}</div>
   `
 })
 export class MyComponent {
@@ -41,12 +45,17 @@ export class MyComponent {
       position: 'Developer'
     };
 
+
     public counter: Observable<number>;
+
+    public profile: any;
 
     @ViewChild('myinput') private myinput;
 
     constructor(private store: Store<AppState>) {
       this.counter = store.select('counter');
+
+      this.store.select('profile').subscribe((profile) => this.profile = profile);
     }
 
     public submit(event) {
@@ -63,5 +72,10 @@ export class MyComponent {
 
     public reset() {
       this.store.dispatch({ type: RESET });
+    }
+
+    public addProfile() {
+      const profile = { name: 'lala', lastname: 'pepe', position: 'position' };
+      this.store.dispatch({ type: ADD_PROFILE, payload: profile });
     }
 }
