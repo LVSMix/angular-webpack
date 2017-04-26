@@ -36,6 +36,8 @@ interface AppState {
 
     <button (click)="addProfile()">Add Profile</button>
     <div>profile: {{profile.name}} - {{profile.lastname}} - {{profile.position}}</div>
+
+    <pre>Testing ngrx</pre>
   `
 })
 export class MyComponent {
